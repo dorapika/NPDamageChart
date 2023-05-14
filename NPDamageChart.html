@@ -27,7 +27,7 @@ am4core.useTheme(am4themes_animated);
 var chart = am4core.create("chartdiv", am4charts.XYChart);
 chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
-chart.paddingRight = 50;
+chart.paddingRight = 40;
 
 chart.data = [
 {
@@ -59,7 +59,7 @@ chart.data = [
     "steps": 290782,
     "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/10012000.png"
 }, {
-    "name": "水院精神異常三層特攻",
+    "name": "水院三層特攻",
     "steps": 283997,
     "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/23004000.png"
 }, {
@@ -165,7 +165,7 @@ categoryAxis.dataFields.category = "name";
 categoryAxis.renderer.grid.template.strokeOpacity = 0;
 categoryAxis.renderer.minGridDistance = 10;
 categoryAxis.renderer.labels.template.dx = -40;
-categoryAxis.renderer.minWidth = 120;
+categoryAxis.renderer.minWidth = 140;
 categoryAxis.renderer.tooltip.dx = -40;
 
 var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
