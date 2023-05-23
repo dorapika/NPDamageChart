@@ -1,257 +1,351 @@
+
 <!-- Styles -->
 <style>
 #chartdiv {
   width: 100%;
-  height: 400%;
+  height: 300%;
 }
-
+  /* Adjust image size as needed */
+  img {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
 </style>
 
 <!-- Resources -->
-<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
-<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
-<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+<script src="dataSource.js"></script>
+<div id="imageContainer"></div>
+<button id="buttonA">上下六騎1倍傷害計算 + 狂丑偽職1.5倍傷害計算 + 其餘Extra1倍傷害計算</button>
+<button id="buttonB">狂職以外皆為2倍計算</button>
 
+<div id="chartdiv"></div>
 <!-- Chart code -->
 <script>
-am4core.ready(function() {
+  var imageContainer = document.getElementById("imageContainer");
+  var classIndices = [1,2,3,4,5,6,7,9,23,11,10,25,28]
+  var classOrder = [Saber,Archer,Lancer,Rider,Caster,Assassin,Berserker,Ruler,MoonCancer,Avenger,AlterEgo,Foreigner,Pretender]
+  var classOrderDouble = [
+    Saber.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
+    Archer.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
+    Lancer.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
+    Rider.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
+    Caster.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
+    Assassin.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
+    Berserker.map(item => ({ name: item.name + "1.5倍", steps: item.steps * 1, pictureSettings: item.pictureSettings })),
+    Ruler.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
+    MoonCancer.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
+    Avenger.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
+    AlterEgo.map(item => ({ name: item.name + "2倍", steps: Math.round(item.steps * 4 / 3), pictureSettings: item.pictureSettings })),
+    Foreigner.map(item => ({ name: item.name + "2倍", steps: Math.round(item.steps * 4 / 3), pictureSettings: item.pictureSettings })),
+    Pretender.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
+    ]
+  var classDisplayedNormal = []
+  var classDisplayedDouble = []
+  classIndices.forEach(function(currentIndex) {
+    var imageA = "https://kazemai.github.io/fgo-vz/common/images/icon/class/class_" + currentIndex + "_4.png";
+    var imageB = "https://kazemai.github.io/fgo-vz/common/images/icon/class/class_" + currentIndex + "_1.png";
 
-// Themes begin
-am4core.useTheme(am4themes_animated);
-// Themes end
+    var imgElement = document.createElement("img");
+    imgElement.src = imageA;
+    imgElement.onclick = createToggleHandler(imgElement, imageA, imageB, currentIndex);
 
-/**
- * Chart design taken from Samsung health app
- */
+    imageContainer.appendChild(imgElement);
+  });
 
-var chart = am4core.create("chartdiv", am4charts.XYChart);
-chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
-
-chart.paddingRight = 40;
-
-chart.data = [
-{
-    "name": "太歲人特攻",
-    "steps": 479663,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/10012000.png"
-}, {
-    "name": "煙霧鏡雙特攻",
-    "steps": 460451,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6047000.png"
-}, {
-    "name": "伊吹地特攻",
-    "steps": 372640,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/7043000.png"
-}, {
-    "name": "神父惡特攻",
-    "steps": 309594,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/10015000.png"
-}, {
-    "name": "煙霧鏡神性/超巨大特攻",
-    "steps": 307017,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6047000.png"
-}, {
-    "name": "瓊安雙特攻",
-    "steps": 306246,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/9016000.png"
-}, {
-    "name": "太歲",
-    "steps": 290782,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/10012000.png"
-}, {
-    "name": "水院三層特攻",
-    "steps": 283997,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/23004000.png"
-}, {
-    "name": "曲亭馬琴雙特攻",
-    "steps": 266035,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/4048000.png"
-},  {
-    "name": "院院",
-    "steps": 265370,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/10003000.png"
-}, {
-    "name": "仇凜",
-    "steps": 253659,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/11009000.png"
-}, {
-    "name": "壹與",
-    "steps": 253135,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/9015000.png"
-}, {
-    "name": "水迦摩魅惑特攻",
-    "steps": 244763,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/11011000.png"
-}, {
-    "name": "小教授善特攻",
-    "steps": 234286,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/9013000.png"
-}, {
-    "name": "伊吹",
-    "steps": 225941,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/7043000.png"
-}, {
-    "name": "大文西",
-    "steps": 223741,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/5009000.png"
-}, {
-    "name": "村正王特攻",
-    "steps": 215357,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/1049000.png"
-}, {
-    "name": "仇尼托人特攻",
-    "steps": 211408,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/11015000.png"
-},  {
-    "name": "神父",
-    "steps": 206396,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/10015000.png"
-}, {
-    "name": "煙霧鏡",
-    "steps": 204728,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6047000.png"
-}, {
-    "name": "曲亭馬琴惡特攻",
-    "steps": 204677,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/4048000.png"
-}, {
-    "name": "瓊安人特攻",
-    "steps": 204164,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/9016000.png"
-}, {
-    "name": "龍馬",
-    "steps": 197288,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3050000.png"
-}, {
-    "name": "瓊安惡特攻",
-    "steps": 185603,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/9016000.png"
-}, {
-    "name": "村正",
-    "steps": 179464,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/1049000.png"
-}, {
-    "name": "曲亭馬琴魔性特攻",
-    "steps": 177407,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/4048000.png"
-}, {
-    "name": "仇尼托",
-    "steps": 156663,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/11015000.png"
-}, {
-    "name": "小教授",
-    "steps": 156190,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/9013000.png"
-}, {
-    "name": "奧德修斯",
-    "steps": 146513,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/4038000.png"
-}, {
-    "name": "曲亭馬琴",
-    "steps": 136501,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/4048000.png"
-}, {
-    "name": "泊貞",
-    "steps": 132133,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2032000.png"
-}, {
-    "name": "瓊安",
-    "steps": 123735,
-    "href": "https://kazemai.github.io/fgo-vz/common/images/icon/faces/9016000.png"
-}];
-
-var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
-categoryAxis.dataFields.category = "name";
-categoryAxis.renderer.grid.template.strokeOpacity = 0;
-categoryAxis.renderer.minGridDistance = 10;
-categoryAxis.renderer.labels.template.dx = -40;
-categoryAxis.renderer.minWidth = 220;
-categoryAxis.renderer.tooltip.dx = -40;
-
-var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
-valueAxis.renderer.inside = true;
-valueAxis.renderer.labels.template.fillOpacity = 0.3;
-valueAxis.renderer.grid.template.strokeOpacity = 0;
-valueAxis.min = 0;
-valueAxis.cursorTooltipEnabled = false;
-valueAxis.renderer.baseGrid.strokeOpacity = 0;
-valueAxis.renderer.labels.template.dy = 20;
-
-var series = chart.series.push(new am4charts.ColumnSeries);
-series.dataFields.valueX = "steps";
-series.dataFields.categoryY = "name";
-series.tooltipText = "{valueX.value}";
-series.tooltip.pointerOrientation = "vertical";
-series.tooltip.dy = - 30;
-series.columnsContainer.zIndex = 100;
-
-var columnTemplate = series.columns.template;
-columnTemplate.height = am4core.percent(40);
-columnTemplate.maxHeight = 50;
-columnTemplate.column.cornerRadius(60, 10, 60, 10);
-columnTemplate.strokeOpacity = 0;
-
-series.heatRules.push({ target: columnTemplate, property: "fill", dataField: "valueX", min: am4core.color("#e5dc36"), max: am4core.color("#5faa46") });
-series.mainContainer.mask = undefined;
-
-var cursor = new am4charts.XYCursor();
-chart.cursor = cursor;
-cursor.lineX.disabled = true;
-cursor.lineY.disabled = true;
-cursor.behavior = "none";
-
-var bullet = columnTemplate.createChild(am4charts.CircleBullet);
-bullet.circle.radius = 30;
-bullet.valign = "middle";
-bullet.align = "left";
-bullet.isMeasured = true;
-bullet.interactionsEnabled = false;
-bullet.horizontalCenter = "right";
-bullet.interactionsEnabled = false;
-
-var hoverState = bullet.states.create("hover");
-var outlineCircle = bullet.createChild(am4core.Circle);
-outlineCircle.adapter.add("radius", function (radius, target) {
-    var circleBullet = target.parent;
-    return circleBullet.circle.pixelRadius + 10;
-})
-
-var image = bullet.createChild(am4core.Image);
-image.width = 60;
-image.height = 60;
-image.horizontalCenter = "middle";
-image.verticalCenter = "middle";
-image.propertyFields.href = "href";
-
-image.adapter.add("mask", function (mask, target) {
-    var circleBullet = target.parent;
-    return circleBullet.circle;
-})
-
-var previousBullet;
-chart.cursor.events.on("cursorpositionchanged", function (event) {
-    var dataItem = series.tooltipDataItem;
-
-    if (dataItem.column) {
-        var bullet = dataItem.column.children.getIndex(1);
-
-        if (previousBullet && previousBullet != bullet) {
-            previousBullet.isHover = false;
+    // Function to create a toggle handler for each image
+    function createToggleHandler(imgElement, imageA, imageB, currentIndex) {
+      return function() {
+        var classIndex = classIndices.indexOf(currentIndex);
+        var classSelected = classOrder[classIndex];
+        var classSelectedDouble = classOrderDouble[classIndex];
+        if (imgElement.src === imageA) {
+          imgElement.src = imageB;
+          classDisplayedNormal = classDisplayedNormal.filter(function(element) {
+            return !classSelected.includes(element);
+            });
+          classDisplayedDouble = classDisplayedDouble.filter(function(element) {
+            return !classSelectedDouble.includes(element);
+            });
+           console.log(classDisplayedNormal.length)
+           console.log(classDisplayedDouble.length)
+        } else {
+          imgElement.src = imageA;
+          classDisplayedNormal = classDisplayedNormal.concat(classSelected)
+          classDisplayedDouble = classDisplayedDouble.concat(classSelectedDouble)
+           console.log(classDisplayedNormal.length)
+           console.log(classDisplayedDouble.length)
         }
+        classDisplayedNormal = classDisplayedNormal.sort((a, b) => a.steps - b.steps);
+        classDisplayedDouble = classDisplayedDouble.sort((a, b) => a.steps - b.steps);
 
-        if (previousBullet != bullet) {
-
-            var hs = bullet.states.getKey("hover");
-            hs.properties.dx = dataItem.column.pixelWidth;
-            bullet.isHover = true;
-
-            previousBullet = bullet;
-        }
+      };
     }
+  function updateChartHeight() {
+    var heightPercentage = classDisplayedNormal.length * 12; // Calculate the height percentage
+    chartdiv.style.height = heightPercentage + "%";
+  }
+
+  classOrder.forEach(function(currentClass) {
+    classDisplayedNormal = classDisplayedNormal.concat(currentClass)
+  });
+  classOrderDouble.forEach(function(currentClass) {
+    classDisplayedDouble = classDisplayedDouble.concat(currentClass)
+  });
+  classDisplayedNormal = classDisplayedNormal.sort((a, b) => a.steps - b.steps);
+  classDisplayedDouble = classDisplayedDouble.sort((a, b) => a.steps - b.steps);
+
+  var chartdiv = document.getElementById("chartdiv");
+  updateChartHeight();
+
+var root;
+am5.ready(function() {
+
+// Create root element
+// https://www.amcharts.com/docs/v5/getting-started/#Root_element
+root = am5.Root.new("chartdiv");
+
+// Set themes
+// https://www.amcharts.com/docs/v5/concepts/themes/
+root.setThemes([
+  am5themes_Animated.new(root)
+]);
+
+
+// Create chart
+// https://www.amcharts.com/docs/v5/charts/xy-chart/
+var chart = root.container.children.push(
+  am5xy.XYChart.new(root, {
+    panX: false,
+    panY: false,
+    wheelX: "none",
+    wheelY: "none",
+    paddingLeft: 50,
+    paddingRight: 40
+  })
+);
+
+// Add legend
+// https://www.amcharts.com/docs/v5/charts/xy-chart/legend-xy-series/
+var legend = chart.children.push(
+  am5.Legend.new(root, {
+    centerX: am5.p50,
+    x: am5.p50
+  })
+);
+
+// Create axes
+// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+var yRenderer = am5xy.AxisRendererY.new(root, {});
+yRenderer.grid.template.set("visible", false);
+
+var yAxis = chart.yAxes.push(
+  am5xy.CategoryAxis.new(root, {
+    categoryField: "name",
+    renderer: yRenderer,
+    paddingRight:40
+  })
+);
+
+var xRenderer = am5xy.AxisRendererX.new(root, {});
+xRenderer.grid.template.set("strokeDasharray", [3]);
+
+var xAxis = chart.xAxes.push(
+  am5xy.ValueAxis.new(root, {
+    min: 0,
+    renderer: xRenderer
+  })
+);
+
+// Add series
+// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+var series = chart.series.push(
+  am5xy.ColumnSeries.new(root, {
+    name: "Income",
+    xAxis: xAxis,
+    yAxis: yAxis,
+    valueXField: "steps",
+    categoryYField: "name",
+    sequencedInterpolation: true,
+    calculateAggregates: true,
+    maskBullets: false,
+    tooltip: am5.Tooltip.new(root, {
+      dy: -30,
+      pointerOrientation: "vertical",
+      labelText: "{valueX}"
+    })
+  })
+);
+
+series.columns.template.setAll({
+  strokeOpacity: 0,
+  cornerRadiusBR: 10,
+  cornerRadiusTR: 10,
+  cornerRadiusBL: 10,
+  cornerRadiusTL: 10,
+  maxHeight: 50,
+  fillOpacity: 0.8
+});
+
+var currentlyHovered;
+
+series.columns.template.events.on("pointerover", function(e) {
+  handleHover(e.target.dataItem);
+});
+
+series.columns.template.events.on("pointerout", function(e) {
+  handleOut();
+});
+
+var circleTemplate = am5.Template.new({});
+
+series.bullets.push(function(root, series, dataItem) {
+  var bulletContainer = am5.Container.new(root, {});
+  var circle = bulletContainer.children.push(
+    am5.Circle.new(
+      root,
+      {
+        radius: 34
+      },
+      circleTemplate
+    )
+  );
+
+  var maskCircle = bulletContainer.children.push(
+    am5.Circle.new(root, { radius: 27 })
+  );
+
+  // only containers can be masked, so we add image to another container
+  var imageContainer = bulletContainer.children.push(
+    am5.Container.new(root, {
+      mask: maskCircle
+    })
+  );
+
+  // not working
+  var image = imageContainer.children.push(
+    am5.Picture.new(root, {
+      templateField: "pictureSettings",
+      centerX: am5.p50,
+      centerY: am5.p50,
+      width: 60,
+      height: 60
+    })
+  );
+
+  return am5.Bullet.new(root, {
+    locationX: 0,
+    sprite: bulletContainer
+  });
+});
+
+// heatrule
+series.set("heatRules", [
+  {
+    dataField: "valueX",
+    min: am5.color(0xe5dc36),
+    max: am5.color(0x5faa46),
+    target: series.columns.template,
+    key: "fill"
+  },
+  {
+    dataField: "valueX",
+    min: am5.color(0xe5dc36),
+    max: am5.color(0x5faa46),
+    target: circleTemplate,
+    key: "fill"
+  }
+]);
+
+series.data.setAll(classDisplayedNormal);
+yAxis.data.setAll(classDisplayedNormal);
+
+var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+cursor.lineX.set("visible", false);
+cursor.lineY.set("visible", false);
+
+cursor.events.on("cursormoved", function() {
+  var dataItem = series.get("tooltip").dataItem;
+  if (dataItem) {
+    handleHover(dataItem)
+  }
+  else {
+    handleOut();
+  }
 })
 
-}); // end am4core.ready()
-</script>
+function handleHover(dataItem) {
+  if (dataItem && currentlyHovered != dataItem) {
+    handleOut();
+    currentlyHovered = dataItem;
+    var bullet = dataItem.bullets[0];
+    bullet.animate({
+      key: "locationX",
+      to: 1,
+      duration: 600,
+      easing: am5.ease.out(am5.ease.cubic)
+    });
+  }
+}
 
-<!-- HTML -->
-<div id="chartdiv"></div>
+function handleOut() {
+  if (currentlyHovered) {
+    var bullet = currentlyHovered.bullets[0];
+    bullet.animate({
+      key: "locationX",
+      to: 0,
+      duration: 600,
+      easing: am5.ease.out(am5.ease.cubic)
+    });
+  }
+}
+
+series.columns.template.events.on("click", function(ev) {
+  // column id
+  console.log("Clicked on a column", ev.target.uid);
+  // data item
+  console.log(ev.target.dataItem);
+  // your original data object
+  console.log(ev.target.dataItem.dataContext);
+  // series
+  console.log(ev.target.dataItem.component)
+  
+});
+
+// Make stuff animate on load
+// https://www.amcharts.com/docs/v5/concepts/animations/
+series.appear();
+chart.appear(1000, 100);
+}); // end am5.ready()
+
+function handleButtonClick(button) {
+  var chart = root.container.children.getIndex(0);
+  var series = chart.series.getIndex(0);
+  var yAxes = chart.yAxes.getIndex(0);
+  if (button.id === "buttonA"){
+    series.data.setAll(classDisplayedNormal);
+    yAxes.data.setAll(classDisplayedNormal);
+  } else {
+    series.data.setAll(classDisplayedDouble);
+    yAxes.data.setAll(classDisplayedDouble);    
+  }
+  updateChartHeight();
+  series.appear();
+  chart.appear(1000, 100);
+  console.log(series.data)
+}
+
+document.getElementById("buttonA").addEventListener("click", function() {
+  handleButtonClick(this);
+});
+
+document.getElementById("buttonB").addEventListener("click", function() {
+  handleButtonClick(this);
+});
+
+</script>
+</body>
+</html>
