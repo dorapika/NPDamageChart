@@ -26,7 +26,7 @@
 <!-- Chart code -->
 <script>
   var imageContainer = document.getElementById("imageContainer");
-  var classIndices = [1,2,3,4,5,6,7,9,23,11,10,25,28]
+  var classIndices = [1,2,3,4,5,6,7,9,23,11,10,25,28,1001]
   var classOrder = [Saber,Archer,Lancer,Rider,Caster,Assassin,Berserker,Ruler,MoonCancer,Avenger,AlterEgo,Foreigner,Pretender]
   var classOrderDouble = [
     Saber.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
@@ -52,7 +52,6 @@
     var imgElement = document.createElement("img");
     imgElement.src = imageA;
     imgElement.onclick = createToggleHandler(imgElement, imageA, imageB, currentIndex);
-
     imageContainer.appendChild(imgElement);
   });
 
@@ -62,30 +61,55 @@
         var classIndex = classIndices.indexOf(currentIndex);
         var classSelected = classOrder[classIndex];
         var classSelectedDouble = classOrderDouble[classIndex];
-        if (imgElement.src === imageA) {
-          imgElement.src = imageB;
-          classDisplayedNormal = classDisplayedNormal.filter(function(element) {
-            return !classSelected.includes(element);
+        if (currentIndex == 1001){
+          // select or de-select all classes
+          if (imgElement.src === imageA) {
+            for (var i = 0; i < imageContainer.children.length; i++) {
+              var child = imageContainer.children[i];
+              child.src = "https://kazemai.github.io/fgo-vz/common/images/icon/class/class_" + classIndices[i] + "_1.png";
+            }
+            classDisplayedNormal = []
+            classDisplayedDouble = []
+          } else {
+            for (var i = 0; i < imageContainer.children.length; i++) {
+              var child = imageContainer.children[i];
+              child.src = "https://kazemai.github.io/fgo-vz/common/images/icon/class/class_" + classIndices[i] + "_4.png";
+            }
+            classDisplayedNormal = []
+            classOrder.forEach(function(currentClass) {
+              if (classDisplayedNormal.includes(currentClass) == false) {
+                classDisplayedNormal = classDisplayedNormal.concat(currentClass)
+              }
             });
-          classDisplayedDouble = classDisplayedDouble.filter(function(element) {
-            return !classSelectedDouble.includes(element);
+            classDisplayedDouble = []
+            classOrderDouble.forEach(function(currentClass) {
+              if (classDisplayedDouble.includes(currentClass) == false) {
+                classDisplayedDouble = classDisplayedDouble.concat(currentClass)
+              }
             });
-           console.log(classDisplayedNormal.length)
-           console.log(classDisplayedDouble.length)
+          }
         } else {
-          imgElement.src = imageA;
-          classDisplayedNormal = classDisplayedNormal.concat(classSelected)
-          classDisplayedDouble = classDisplayedDouble.concat(classSelectedDouble)
-           console.log(classDisplayedNormal.length)
-           console.log(classDisplayedDouble.length)
+          if (imgElement.src === imageA) {
+            imgElement.src = imageB;
+            classDisplayedNormal = classDisplayedNormal.filter(function(element) {
+              return !classSelected.includes(element);
+              });
+            classDisplayedDouble = classDisplayedDouble.filter(function(element) {
+              return !classSelectedDouble.includes(element);
+              });
+          } else {
+            imgElement.src = imageA;
+            classDisplayedNormal = classDisplayedNormal.concat(classSelected)
+            classDisplayedDouble = classDisplayedDouble.concat(classSelectedDouble)
+          }
         }
+        console.log(classDisplayedNormal)
         classDisplayedNormal = classDisplayedNormal.sort((a, b) => a.steps - b.steps);
         classDisplayedDouble = classDisplayedDouble.sort((a, b) => a.steps - b.steps);
-
       };
     }
   function updateChartHeight() {
-    var heightPercentage = classDisplayedNormal.length * 12; // Calculate the height percentage
+    var heightPercentage = classDisplayedNormal.length * 13; // Calculate the height percentage
     chartdiv.style.height = heightPercentage + "%";
   }
 
