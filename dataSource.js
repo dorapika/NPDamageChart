@@ -87,6 +87,10 @@ var Ruler = [
     steps: 306246,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/9016000.png"}
 }, {
+    name: "壹與神性特攻",
+    steps: 379702,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/9015000.png"}
+}, {
     name: "壹與",
     steps: 253135,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/9015000.png"}
