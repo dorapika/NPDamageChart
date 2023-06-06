@@ -1,10 +1,10 @@
 
 <!-- Styles -->
 <style>
-#chartdiv {
-  width: 100%;
-  height: 300%;
-}
+  #chartdiv {
+    width: 100%;
+    height: 300%;
+  }
   /* Adjust image size as needed */
   img {
     width: 50px;
@@ -24,11 +24,11 @@
   <img title="奧伯龍" src="https://kazemai.github.io/fgo-vz/common/images/icon/faces/28001000.png">
   <img title="寶石翁" src="https://kazemai.github.io/fgo-vz/common/images/icon/faces/9400340.png">
   <img title="決戰服" src="https://kazemai.github.io/fgo-vz/common/images/icon/equip/211.png">
+  Wave 3/3
 </div>
 <div id="imageContainer"></div>
 <button id="buttonA">上下六騎1倍傷害計算 + 狂丑偽職1.5倍傷害計算 + 其餘Extra1倍傷害計算</button>
 <button id="buttonB">狂職以外皆為2倍計算</button>
-
 <div id="chartdiv"></div>
 <!-- Chart code -->
 <script>
@@ -36,19 +36,19 @@
   var classIndices = [1,2,3,4,5,6,7,9,23,11,10,25,28,1001]
   var classOrder = [Saber,Archer,Lancer,Rider,Caster,Assassin,Berserker,Ruler,MoonCancer,Avenger,AlterEgo,Foreigner,Pretender]
   var classOrderDouble = [
-    Saber.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
-    Archer.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
-    Lancer.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
-    Rider.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
-    Caster.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
-    Assassin.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
-    Berserker.map(item => ({ name: item.name + "1.5倍", steps: item.steps * 1, pictureSettings: item.pictureSettings })),
-    Ruler.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
-    MoonCancer.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
-    Avenger.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
-    AlterEgo.map(item => ({ name: item.name + "2倍", steps: Math.round(item.steps * 4 / 3), pictureSettings: item.pictureSettings })),
-    Foreigner.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
-    Pretender.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings })),
+    Saber.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings, features: item.features })),
+    Archer.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings, features: item.features })),
+    Lancer.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings, features: item.features })),
+    Rider.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings, features: item.features })),
+    Caster.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings, features: item.features })),
+    Assassin.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings, features: item.features })),
+    Berserker.map(item => ({ name: item.name + "1.5倍", steps: item.steps * 1, pictureSettings: item.pictureSettings, features: item.features })),
+    Ruler.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings, features: item.features })),
+    MoonCancer.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings, features: item.features })),
+    Avenger.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings, features: item.features })),
+    AlterEgo.map(item => ({ name: item.name + "2倍", steps: Math.round(item.steps * 4 / 3), pictureSettings: item.pictureSettings, features: item.features })),
+    Foreigner.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings, features: item.features })),
+    Pretender.map(item => ({ name: item.name + "2倍", steps: item.steps * 2, pictureSettings: item.pictureSettings, features: item.features })),
     ]
   var classDisplayedNormal = []
   var classDisplayedDouble = []
@@ -85,6 +85,7 @@
             classDisplayedNormal = []
             classOrder.forEach(function(currentClass) {
               if (classDisplayedNormal.includes(currentClass) == false) {
+                console.log(currentClass)
                 classDisplayedNormal = classDisplayedNormal.concat(currentClass)
               }
             });
@@ -110,7 +111,7 @@
             classDisplayedDouble = classDisplayedDouble.concat(classSelectedDouble)
           }
         }
-        console.log(classDisplayedNormal)
+        //console.log(classDisplayedNormal)
         classDisplayedNormal = classDisplayedNormal.sort((a, b) => a.steps - b.steps);
         classDisplayedDouble = classDisplayedDouble.sort((a, b) => a.steps - b.steps);
       };
@@ -204,7 +205,7 @@ var series = chart.series.push(
     calculateAggregates: true,
     maskBullets: false,
     tooltip: am5.Tooltip.new(root, {
-      dy: -30,
+      dy: -20,
       pointerOrientation: "vertical",
       labelText: "{valueX}"
     })
@@ -291,8 +292,8 @@ series.set("heatRules", [
   }
 ]);
 
-series.data.setAll(classDisplayedNormal);
-yAxis.data.setAll(classDisplayedNormal);
+//series.data.setAll(classDisplayedNormal);
+//yAxis.data.setAll(classDisplayedNormal);
 
 var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
 cursor.lineX.set("visible", false);
@@ -366,7 +367,7 @@ function handleButtonClick(button) {
   updateChartHeight();
   series.appear();
   chart.appear(1000, 100);
-  console.log(series.data)
+  //console.log(series.data)
 }
 
 document.getElementById("buttonA").addEventListener("click", function() {
