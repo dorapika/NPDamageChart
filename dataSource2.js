@@ -298,11 +298,13 @@ var AllElementsQuick = [
     steps: 179441,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/9014000.png"},
     features: ["Ruler","無"]
+    // 雙RBA+CBA
 }, {
     name: "RBA秩序特攻",
     steps: 269037,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/9014000.png"},
     features: ["Ruler","秩序"]
+    // 雙RBA+CBA
 }, {
     name: "道滿",
     steps: 267447,
@@ -448,6 +450,16 @@ var AllElementsQuick = [
 
 var AllElementsBuster = [
 {
+    name: "奧伯龍",     // 雙光兔+暗兔
+    steps: 200862,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/28001000.png"},
+    features: ["Pretender","無"]
+}, {
+    name: "奧伯龍秩序特攻",     // 雙光兔+暗兔
+    steps: 301294,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/28001000.png"},
+    features: ["Pretender","秩序"]
+}, {
     name: "庫庫爾坎",
     steps: 352008,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/25011000.png"},
@@ -458,10 +470,30 @@ var AllElementsBuster = [
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/25011000.png"},
     features: ["Foreigner","地"]
 }, {
+    name: "闇兔",
+    steps: 127749,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/25009000.png"},
+    features: ["Foreigner","無"]
+}, {
+    name: "闇兔地特攻",
+    steps: 191624,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/25009000.png"},
+    features: ["Foreigner","地"]
+}, {
+    name: "水阿比",
+    steps: 123794,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/25007000.png"},
+    features: ["Foreigner","無"]
+}, {
     name: "迪亞馬特",
     steps: 473901,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/10016000.png"},
     features: ["AlterEgo","無"]
+}, {
+    name: "水BB",
+    steps: 214260,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/23002000.png"},
+    features: ["MoonCancer","無"]
 }, {
     name: "愛爾奎特",
     steps: 244026,
@@ -472,6 +504,16 @@ var AllElementsBuster = [
     steps: 365890,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/23005000.png"},
     features: ["MoonCancer","混沌"]
+}, {
+    name: "仇信長",
+    steps: 287053,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/11007000.png"},
+    features: ["Avenger","無"]
+}, {
+    name: "仇信長神性特攻",
+    steps: 430579,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/11007000.png"},
+    features: ["Avenger","神性"]
 }, {
     name: "摩根",
     steps: 254373,
@@ -492,6 +534,101 @@ var AllElementsBuster = [
     steps: 381726,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/7033000.png"},
     features: ["Berserker","弱體"]
+}, {
+    name: "女帝",
+    steps: 140902,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6032000.png"},
+    features: ["Assassin","無"]
+}, {
+    name: "光兔",    // 光兔+暗兔
+    steps: 195851,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6042000.png"},
+    features: ["Assassin","無"]
+}, {
+    name: "光兔人特攻",    // 光兔+暗兔
+    steps: 318258,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6042000.png"},
+    features: ["Assassin","人"]
+}, {
+    name: "德雷克",
+    steps: 152107,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/4003000.png"},
+    features: ["Rider","無"]
+}, {
+    name: "艾蕾",
+    steps: 192018,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3032000.png"},
+    features: ["Lancer","無"]
+}, {
+    name: "艾蕾地特攻",
+    steps: 287915,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3032000.png"},
+    features: ["Lancer","地"]
+}, {
+    name: "拿破崙",
+    steps: 212849,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2031000.png"},
+    features: ["Archer","無"]
+}, {
+    name: "拿破崙神性特攻",
+    steps: 319273,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2031000.png"},
+    features: ["Archer","神性"]
+}, {
+    name: "金閃",
+    steps: 276016,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2002000.png"},
+    features: ["Archer","無"]
+}, {
+    name: "金閃從者特攻",
+    steps: 413937,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2002000.png"},
+    features: ["Archer","神性"]
+}, {
+    name: "特斯拉",
+    steps: 248037,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2011000.png"},
+    features: ["Archer","無"]
+}, {
+    name: "特斯拉天特攻",
+    steps: 372055,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2011000.png"},
+    features: ["Archer","天"]
+}, {
+    name: "特斯拉地特攻",
+    steps: 372055,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2011000.png"},
+    features: ["Archer","地"]
+}, {
+    name: "伊吹",
+    steps: 209663,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/1046000.png"},
+    features: ["Saber","無"]
+}, {
+    name: "伊吹死靈特攻",
+    steps: 262016,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/1046000.png"},
+    features: ["Saber","死靈"]
+}, {
+    name: "阿蒂拉",
+    steps: 266959,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/1018000.png"},
+    features: ["Saber","無"]
+}, {
+    name: "小莫",
+    steps: 227558,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/1009000.png"},
+    features: ["Saber","無"]
+}, {
+    name: "小莫亞瑟特攻",
+    steps: 409605,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/1009000.png"},
+    features: ["Saber","亞瑟"]
+},  {
+    name: "藍傻",
+    steps: 211468,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/1001000.png"},
+    features: ["Saber","無"]
 },
 ];
 

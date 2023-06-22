@@ -87,6 +87,8 @@
 <input id="混沌" type="checkbox" checked /><label for="混沌">混沌特攻</label>
 <input id="龍" type="checkbox" checked /><label for="龍">龍特攻</label>
 <input id="王" type="checkbox" checked /><label for="王">王特攻</label>
+<input id="死靈" type="checkbox" checked /><label for="死靈">死靈特攻</label>
+<input id="亞瑟" type="checkbox" checked /><label for="亞瑟">亞瑟特攻</label>
 <input id="弱體" type="checkbox" checked /><label for="弱體">弱體特攻</label>
 <input id="魅惑" type="checkbox" checked /><label for="魅惑">魅惑特攻</label>
 <input id="精神" type="checkbox" checked /><label for="精神">精神特攻</label>
@@ -109,7 +111,7 @@
     if (currentTag.features.includes("Berserker")) {
       tempTag.name += "1.5倍";
       AllElementsDouble = AllElementsDouble.concat(tempTag);
-    } else if (currentTag.features.includes("AlterEgo")){
+    } else if (currentTag.features.includes("AlterEgo") || currentTag.features.includes("Pretender")){
       tempTag.steps = Math.round(tempTag.steps *4 / 3);
       tempTag.name += "2倍"; 
       AllElementsDouble = AllElementsDouble.concat(tempTag);
