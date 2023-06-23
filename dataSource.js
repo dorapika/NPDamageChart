@@ -341,6 +341,26 @@ var AllElementsQuick = [
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/7044000.png"},
     features: ["Berserker","人"]
 }, {
+    name: "X Alter",
+    steps: 223401,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/25008000.png"},
+    features: ["Foreigner","無"]
+}, {
+    name: "X Alter惡特攻",
+    steps: 335101,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/25008000.png"},
+    features: ["Foreigner","惡"]
+}, {
+    name: "X Alter機械特攻",
+    steps: 279251,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/25008000.png"},
+    features: ["Foreigner","惡"]
+}, {
+    name: "X Alter雙特攻",
+    steps: 418876,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/25008000.png"},
+    features: ["Foreigner","惡","機械"]
+}, {
     name: "果心居士",
     steps: 139618,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6049000.png"},
