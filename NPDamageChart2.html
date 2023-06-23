@@ -197,6 +197,7 @@
     classDisplayedNormal = classDisplayedNormal.sort((a, b) => a.steps - b.steps);
     classDisplayedMixed = classDisplayedMixed.sort((a, b) => a.steps - b.steps);
     classDisplayedDouble = classDisplayedDouble.sort((a, b) => a.steps - b.steps);
+    console.log(classDisplayedNormal);
     });
   });
 
@@ -208,7 +209,6 @@
     imgElement.onclick = createToggleHandlerCard(imgElement, imageA, imageB, currentIndex);
     cardsSelected.push(currentIndex)
     cardImageContainer.appendChild(imgElement);
-    console.log(cardsSelected)
   });
   function createToggleHandlerCard(imgElement, imageA, imageB, currentIndex) {
     return function() {
@@ -255,6 +255,7 @@
       classDisplayedNormal = classDisplayedNormal.sort((a, b) => a.steps - b.steps);
       classDisplayedMixed = classDisplayedMixed.sort((a, b) => a.steps - b.steps);
       classDisplayedDouble = classDisplayedDouble.sort((a, b) => a.steps - b.steps);
+      console.log(classDisplayedNormal);
     };
   }
 
@@ -357,8 +358,6 @@
         classDisplayedMixed = classDisplayedMixed.sort((a, b) => a.steps - b.steps);
         classDisplayedDouble = classDisplayedDouble.sort((a, b) => a.steps - b.steps);
         console.log(classDisplayedNormal)
-        console.log(classesSelected)
-        console.log(Featureselected)
       };
     }
   function updateChartHeight() {
