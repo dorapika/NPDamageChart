@@ -361,6 +361,11 @@ var AllElementsQuick = [
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6046000.png"},
     features: ["Assassin","惡"]
 }, {
+    name: "鬼一法眼",
+    steps: 192728,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6041000.png"},
+    features: ["Assassin","無"]
+}, {
     name: "太公望",
     steps: 166664,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/4043000.png"},
@@ -605,6 +610,11 @@ var AllElementsBuster = [
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/4003000.png"},
     features: ["Rider","無"]
 }, {
+    name: "妖蘭",
+    steps: 326737,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3048000.png"},
+    features: ["Lancer","無"]
+}, {
     name: "奎里努斯",
     steps: 190835,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3042000.png"},
@@ -645,6 +655,16 @@ var AllElementsBuster = [
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3032000.png"},
     features: ["Lancer","地"]
 }, {
+    name: "源為朝",
+    steps: 178822,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2046000.png"},
+    features: ["Archer","無"]
+}, {
+    name: "源為朝秩序特攻",
+    steps: 153276,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2046000.png"},
+    features: ["Archer","秩序"]
+},  {
     name: "拿破崙",
     steps: 212849,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2031000.png"},
@@ -655,6 +675,11 @@ var AllElementsBuster = [
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2031000.png"},
     features: ["Archer","神性"]
 }, {
+    name: "伊絲塔",
+    steps: 226972,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2020000.png"},
+    features: ["Archer","無"]
+},{
     name: "金閃",
     steps: 276016,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2002000.png"},
