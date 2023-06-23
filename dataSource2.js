@@ -35,12 +35,12 @@ var AllElementsArts = [
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/25002000.png"},
     features: ["Foreigner","無"]
 }, {
-    name: "伊吹地特攻",
+    name: "水伊吹地特攻",
     steps: 372640,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/7043000.png"},
     features: ["Berserker","地"]
 }, {
-    name: "伊吹",
+    name: "水伊吹",
     steps: 225941,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/7043000.png"},
     features: ["Berserker","無"]
@@ -65,7 +65,7 @@ var AllElementsArts = [
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/23003000.png"},
     features: ["MoonCancer","無"]
 }, {
-    name: "仇凜",
+    name: "仇凜藍卡",
     steps: 253659,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/11009000.png"},
     features: ["Avenger","無"]
@@ -284,6 +284,11 @@ var AllElementsQuick = [
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/11002000.png"},
     features: ["Avenger","無"]
 }, {
+    name: "仇凜綠卡",
+    steps: 242947,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/11009000.png"},
+    features: ["Avenger","無"]
+}, {
     name: "卡蓮",
     steps: 204711,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/9011000.png"},
@@ -335,11 +340,6 @@ var AllElementsQuick = [
     steps: 359134,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/7044000.png"},
     features: ["Berserker","人"]
-}, {
-    name: "項羽",
-    steps: 265764,
-    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/7032000.png"},
-    features: ["Berserker","無"]
 }, {
     name: "果心居士",
     steps: 139618,
@@ -490,6 +490,21 @@ var AllElementsBuster = [
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/10016000.png"},
     features: ["AlterEgo","無"]
 }, {
+    name: "帝王花",
+    steps: 414635,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/10009000.png"},
+    features: ["AlterEgo","無"]
+}, {
+    name: "黑沖",
+    steps: 381077,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/10007000.png"},
+    features: ["AlterEgo","無"]
+}, {
+    name: "黑沖天特攻",
+    steps: 452529,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/10007000.png"},
+    features: ["AlterEgo","天"]
+}, {
     name: "水BB",
     steps: 214260,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/23002000.png"},
@@ -514,6 +529,16 @@ var AllElementsBuster = [
     steps: 430579,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/11007000.png"},
     features: ["Avenger","神性"]
+}, {
+    name: "仇凜紅卡",
+    steps: 297171,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/11009000.png"},
+    features: ["Avenger","無"]
+}, {
+    name: "兔子王",
+    steps: 151566,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/9009000.png"},
+    features: ["Ruler","無"]
 }, {
     name: "摩根",
     steps: 254373,
@@ -550,11 +575,66 @@ var AllElementsBuster = [
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6042000.png"},
     features: ["Assassin","人"]
 }, {
+    name: "水尼祿",
+    steps: 179605,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/5032000.png"},
+    features: ["Caster","無"]
+}, {
+    name: "歐羅巴",
+    steps: 141085,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/4040000.png"},
+    features: ["Rider","無"]
+}, {
+    name: "雷帝",
+    steps: 207713,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/4028000.png"},
+    features: ["Rider","無"]
+}, {
+    name: "雷帝秩序特攻",
+    steps: 231680,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/4028000.png"},
+    features: ["Rider","秩序"]
+}, {
+    name: "雷帝混沌特攻",
+    steps: 231680,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/4028000.png"},
+    features: ["Rider","混沌"]
+}, {
     name: "德雷克",
     steps: 152107,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/4003000.png"},
     features: ["Rider","無"]
 }, {
+    name: "奎里努斯",
+    steps: 190835,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3042000.png"},
+    features: ["Lancer","無"]
+}, {
+    name: "奎里努斯羅馬特攻一層",
+    steps: 228957,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3042000.png"},
+    features: ["Lancer","羅馬"]
+}, {
+    name: "白槍",
+    steps: 142356,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3020000.png"},
+    features: ["Lancer","無"]
+}, {
+    name: "白槍混沌特攻",
+    steps: 177946,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3020000.png"},
+    features: ["Lancer","混沌"]
+}, {
+    name: "白槍惡特攻",
+    steps: 177946,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3020000.png"},
+    features: ["Lancer","惡"]
+}, {
+    name: "白槍雙特攻",
+    steps: 213535,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3020000.png"},
+    features: ["Lancer","混沌","惡"]
+},  {
     name: "艾蕾",
     steps: 192018,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3032000.png"},
@@ -583,7 +663,7 @@ var AllElementsBuster = [
     name: "金閃從者特攻",
     steps: 413937,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2002000.png"},
-    features: ["Archer","神性"]
+    features: ["Archer","從者"]
 }, {
     name: "特斯拉",
     steps: 248037,
@@ -631,6 +711,14 @@ var AllElementsBuster = [
     features: ["Saber","無"]
 },
 ];
-
+AllElementsArts.forEach(function(servant) {
+  servant.card = "arts"
+});
+AllElementsQuick.forEach(function(servant) {
+  servant.card = "quick"
+});
+AllElementsBuster.forEach(function(servant) {
+  servant.card = "buster"
+});
 var AllElements = AllElementsArts.concat(AllElementsQuick)
 AllElements = AllElements.concat(AllElementsBuster)

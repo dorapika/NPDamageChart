@@ -9,6 +9,8 @@
   img {
     width: 50px;
     height: 50px;
+  }
+  img:not([title]) {
     cursor: pointer;
   }
   * { box-sizing: border-box; }
@@ -58,21 +60,14 @@
 <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 <script src="dataSource2.js"></script>
 <div id="title images">
-  <img title="術傻" src="https://kazemai.github.io/fgo-vz/common/images/icon/faces/5045000.png">
-  <img title="術傻" src="https://kazemai.github.io/fgo-vz/common/images/icon/faces/5045000.png">
-  /
-  <img title="RBA" src="https://kazemai.github.io/fgo-vz/common/images/icon/faces/9014000.png">
-  <img title="RBA" src="https://kazemai.github.io/fgo-vz/common/images/icon/faces/9014000.png">
-  /
-  <img title="光兔" src="https://kazemai.github.io/fgo-vz/common/images/icon/faces/6042000.png">
-  <img title="光兔" src="https://kazemai.github.io/fgo-vz/common/images/icon/faces/6042000.png">
-  +
-  <img title="奧伯龍" src="https://kazemai.github.io/fgo-vz/common/images/icon/faces/28001000.png">
+  <div id="cardImageContainer">
   <img title="寶石翁" src="https://kazemai.github.io/fgo-vz/common/images/icon/faces/9400340.png">
   <img title="決戰服" src="https://kazemai.github.io/fgo-vz/common/images/icon/equip/211.png">
+  <img title="奧伯龍" src="https://kazemai.github.io/fgo-vz/common/images/icon/faces/28001000.png">
   Wave 3/3
 </div>
-<div id="imageContainer"></div>
+</div>
+<div id="classImageContainer"></div>
 <div id="featurecheckbox">
 <input id="無" type="checkbox" checked /><label for="無">無特攻</label>
 <input id="天" type="checkbox" checked /><label for="天">天特攻</label>
@@ -87,6 +82,7 @@
 <input id="混沌" type="checkbox" checked /><label for="混沌">混沌特攻</label>
 <input id="龍" type="checkbox" checked /><label for="龍">龍特攻</label>
 <input id="王" type="checkbox" checked /><label for="王">王特攻</label>
+<input id="從者" type="checkbox" checked /><label for="從者">從者特攻</label>
 <input id="死靈" type="checkbox" checked /><label for="死靈">死靈特攻</label>
 <input id="亞瑟" type="checkbox" checked /><label for="亞瑟">亞瑟特攻</label>
 <input id="弱體" type="checkbox" checked /><label for="弱體">弱體特攻</label>
@@ -95,33 +91,54 @@
 <input id="拘束" type="checkbox" checked /><label for="拘束">拘束特攻</label>
 <input id="騎乘" type="checkbox" checked /><label for="騎乘">騎乘特攻</label>
 <input id="騎職" type="checkbox" checked /><label for="騎職">騎職特攻</label>
-<input id="超巨大" type="checkbox" checked /><label for="超巨大">超巨大特攻</label></div>
+<input id="超巨大" type="checkbox" checked /><label for="超巨大">超巨大特攻</label>
+<input id="全選" type="checkbox" checked /><label for="全選">全選</label></div>
 <button id="buttonA">上下六騎1倍傷害計算 + 狂丑偽職1.5倍傷害計算 + 其餘Extra1倍傷害計算</button>
-<button id="buttonB">狂職以外皆為2倍計算</button>
+<button id="buttonB">上下六騎2倍傷害計算 + 狂丑偽職1.5倍傷害計算 + 其餘Extra1倍傷害計算</button>
+<button id="buttonC">狂職以外皆為2倍計算</button>
 <div id="chartdiv"></div>
 <!-- Chart code -->
 <script>
-  var imageContainer = document.getElementById("imageContainer");
-  var classIndices = [1,2,3,4,5,6,7,9,23,11,10,25,28,1001]
-  var classOrder = ["Saber","Archer","Lancer","Rider","Caster","Assassin","Berserker","Ruler","MoonCancer","Avenger","AlterEgo","Foreigner","Pretender"]
+  var classImageContainer = document.getElementById("classImageContainer");
+  var card = ['arts','quick','buster'];
+  var cardsSelected = [];
+  var classIndices = [1,2,3,4,5,6,7,9,23,11,10,25,28,1001];
+  var classOrder = ["Saber","Archer","Lancer","Rider","Caster","Assassin","Berserker","Ruler","MoonCancer","Avenger","AlterEgo","Foreigner","Pretender"];
   var classesSelected = [];
+  var AllElementsMixed = [];
   var AllElementsDouble = [];
   AllElements.forEach(function(currentTag) {
     tempTag = JSON.parse(JSON.stringify(currentTag));
+    tempTag2 = JSON.parse(JSON.stringify(currentTag));
     if (currentTag.features.includes("Berserker")) {
       tempTag.name += "1.5倍";
-      AllElementsDouble = AllElementsDouble.concat(tempTag);
+      tempTag2.name += "1.5倍";
+      AllElementsMixed = AllElementsMixed.concat(tempTag);
+      AllElementsDouble = AllElementsDouble.concat(tempTag2);
     } else if (currentTag.features.includes("AlterEgo") || currentTag.features.includes("Pretender")){
-      tempTag.steps = Math.round(tempTag.steps *4 / 3);
-      tempTag.name += "2倍"; 
-      AllElementsDouble = AllElementsDouble.concat(tempTag);
+      tempTag.name += "1.5倍"; 
+      AllElementsMixed = AllElementsMixed.concat(tempTag);
+      tempTag2.name += "2倍"; 
+      tempTag2.steps = Math.round(tempTag.steps *4 / 3);
+      AllElementsDouble = AllElementsDouble.concat(tempTag2);
+    } else if (currentTag.features.includes("MoonCancer") || currentTag.features.includes("Avenger")
+       || currentTag.features.includes("Ruler")  || currentTag.features.includes("Foreigner")){ 
+      tempTag.name += "1倍";
+      tempTag2.steps *= 2; 
+      tempTag2.name += "2倍";
+      AllElementsMixed = AllElementsMixed.concat(tempTag);
+      AllElementsDouble = AllElementsDouble.concat(tempTag2);
     } else {
       tempTag.steps *= 2; 
       tempTag.name += "2倍";
-      AllElementsDouble = AllElementsDouble.concat(tempTag);
+      tempTag2.steps *= 2; 
+      tempTag2.name += "2倍";
+      AllElementsMixed = AllElementsMixed.concat(tempTag);
+      AllElementsDouble = AllElementsDouble.concat(tempTag2);
     }
   });
   var classDisplayedNormal = [];
+  var classDisplayedMixed = [];
   var classDisplayedDouble = [];
   // Get all the checkboxes by their IDs
   checkboxes = document.querySelectorAll('#featurecheckbox input[type="checkbox"]');
@@ -129,47 +146,129 @@
   checkboxes.forEach(function (checkbox) {
     checkbox.addEventListener('change', function () {
       if (this.checked) {
-        console.log(checkbox.id+'is checked')
-        Featureselected = Array.from(document.querySelectorAll('#featurecheckbox input[type="checkbox"]:checked')).map(checkbox => checkbox.id);
+        if (checkbox.id == "全選") {
+          checkboxes.forEach(function (checkbox_in) {
+            checkbox_in.checked = true;
+          });
+        } 
+          Featureselected = Array.from(document.querySelectorAll('#featurecheckbox input[type="checkbox"]:checked')).map(checkbox => checkbox.id);
+          AllElements.forEach(function(currentTag) {
+            if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))
+              && cardsSelected.includes(currentTag.card)) {
+              classDisplayedNormal = classDisplayedNormal.concat(currentTag);
+            }
+          });
+          AllElementsMixed.forEach(function(currentTag) {
+            if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))
+              && cardsSelected.includes(currentTag.card)) {
+              classDisplayedMixed = classDisplayedMixed.concat(currentTag);
+            }
+          });
+          AllElementsDouble.forEach(function(currentTag) {
+            if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))
+              && cardsSelected.includes(currentTag.card)) {
+              classDisplayedDouble = classDisplayedDouble.concat(currentTag);
+            }
+          });
+      } else {
+        if (checkbox.id == "全選") {
+          checkboxes.forEach(function (checkbox_in) {
+            checkbox_in.checked = false;
+          });
+          classDisplayedNormal = [];
+          classDisplayedMixed = [];
+          classDisplayedDouble = [];
+        } else {
+          selected_tag = this.id;
+          classDisplayedNormal = classDisplayedNormal.filter(function(element) {
+            return !element.features.includes(selected_tag);
+            });
+          classDisplayedMixed = classDisplayedMixed.filter(function(element) {
+            return !element.features.includes(selected_tag);
+            });
+          classDisplayedDouble = classDisplayedDouble.filter(function(element) {
+            return !element.features.includes(selected_tag);
+            });
+        }
+      }        
+    classDisplayedNormal = [...new Set(classDisplayedNormal)];
+    classDisplayedMixed = [...new Set(classDisplayedMixed)];
+    classDisplayedDouble = [...new Set(classDisplayedDouble)];
+    classDisplayedNormal = classDisplayedNormal.sort((a, b) => a.steps - b.steps);
+    classDisplayedMixed = classDisplayedMixed.sort((a, b) => a.steps - b.steps);
+    classDisplayedDouble = classDisplayedDouble.sort((a, b) => a.steps - b.steps);
+    });
+  });
+
+  card.forEach(function(currentIndex) {
+    var imageA = currentIndex + "_1.png";
+    var imageB = currentIndex + "_2.png";
+    var imgElement = document.createElement("img");
+    imgElement.src = imageA;
+    imgElement.onclick = createToggleHandlerCard(imgElement, imageA, imageB, currentIndex);
+    cardsSelected.push(currentIndex)
+    cardImageContainer.appendChild(imgElement);
+    console.log(cardsSelected)
+  });
+  function createToggleHandlerCard(imgElement, imageA, imageB, currentIndex) {
+    return function() {
+      Featureselected = Array.from(document.querySelectorAll('#featurecheckbox input[type="checkbox"]:checked')).map(checkbox => checkbox.id);
+      if (imgElement.src.substring(imgElement.src.lastIndexOf("/") + 1 ) == imageA) {
+        imgElement.src = imageB;
+        classDisplayedNormal = classDisplayedNormal.filter(function(element) {
+          return element.card != currentIndex;
+          });
+        classDisplayedMixed = classDisplayedMixed.filter(function(element) {
+          return element.card != currentIndex;
+          });
+        classDisplayedDouble = classDisplayedDouble.filter(function(element) {
+          return element.card != currentIndex;
+          });
+        cardsSelected =  cardsSelected.filter(function(element) {
+          return element != currentIndex;
+          });
+      } else {
+        imgElement.src = imageA;
         AllElements.forEach(function(currentTag) {
-          if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))) {
+          if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))
+            && currentTag.card == currentIndex) {
             classDisplayedNormal = classDisplayedNormal.concat(currentTag);
           }
         });
+        AllElementsMixed.forEach(function(currentTag) {
+          if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))
+            && currentTag.card == currentIndex) {
+            classDisplayedMixed = classDisplayedMixed.concat(currentTag);
+          }
+        });
         AllElementsDouble.forEach(function(currentTag) {
-          if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))) {
+          if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))
+            && currentTag.card == currentIndex) {
             classDisplayedDouble = classDisplayedDouble.concat(currentTag);
           }
         });
-      } else {
-        console.log(checkbox.id+'is de-checked')
-        selected_tag = this.id;
-        classDisplayedNormal = classDisplayedNormal.filter(function(element) {
-          return !element.features.includes(selected_tag);
-          });
-        classDisplayedDouble = classDisplayedDouble.filter(function(element) {
-          return !element.features.includes(selected_tag);
-          });
+        cardsSelected.push(currentIndex)
       }
-    classDisplayedNormal = [...new Set(classDisplayedNormal)];
-    classDisplayedDouble = [...new Set(classDisplayedDouble)];
-    classDisplayedNormal = classDisplayedNormal.sort((a, b) => a.steps - b.steps);
-    classDisplayedDouble = classDisplayedDouble.sort((a, b) => a.steps - b.steps);
-    console.log(classDisplayedNormal)
-    });
-  });
+      classDisplayedNormal = [...new Set(classDisplayedNormal)];
+      classDisplayedMixed = [...new Set(classDisplayedMixed)];
+      classDisplayedDouble = [...new Set(classDisplayedDouble)];
+      classDisplayedNormal = classDisplayedNormal.sort((a, b) => a.steps - b.steps);
+      classDisplayedMixed = classDisplayedMixed.sort((a, b) => a.steps - b.steps);
+      classDisplayedDouble = classDisplayedDouble.sort((a, b) => a.steps - b.steps);
+    };
+  }
 
   classIndices.forEach(function(currentIndex) {
     var imageA = "https://kazemai.github.io/fgo-vz/common/images/icon/class/class_" + currentIndex + "_4.png";
     var imageB = "https://kazemai.github.io/fgo-vz/common/images/icon/class/class_" + currentIndex + "_1.png";
     var imgElement = document.createElement("img");
     imgElement.src = imageA;
-    imgElement.onclick = createToggleHandler(imgElement, imageA, imageB, currentIndex);
-    imageContainer.appendChild(imgElement);
+    imgElement.onclick = createToggleHandlerClass(imgElement, imageA, imageB, currentIndex);
+    classImageContainer.appendChild(imgElement);
   });
 
     // Function to create a toggle handler for each image
-    function createToggleHandler(imgElement, imageA, imageB, currentIndex) {
+    function createToggleHandlerClass(imgElement, imageA, imageB, currentIndex) {
       return function() {
         var classIndex = classIndices.indexOf(currentIndex);
         var classSelected = classOrder[classIndex];
@@ -177,29 +276,38 @@
         if (currentIndex == 1001){
           // select or de-select all classes
           if (imgElement.src === imageA) {
-            for (var i = 0; i < imageContainer.children.length; i++) {
-              var child = imageContainer.children[i];
+            for (var i = 0; i < classImageContainer.children.length; i++) {
+              var child = classImageContainer.children[i];
               child.src = "https://kazemai.github.io/fgo-vz/common/images/icon/class/class_" + classIndices[i] + "_1.png";
             }
-            classDisplayedNormal = []
-            classDisplayedDouble = []
-            classesSelected = []
+            classDisplayedNormal = [];
+            classDisplayedMixed = [];
+            classDisplayedDouble = [];
+            classesSelected = [];
           } else {
-            for (var i = 0; i < imageContainer.children.length; i++) {
-              var child = imageContainer.children[i];
+            for (var i = 0; i < classImageContainer.children.length; i++) {
+              var child = classImageContainer.children[i];
               child.src = "https://kazemai.github.io/fgo-vz/common/images/icon/class/class_" + classIndices[i] + "_4.png";
             }
-            classDisplayedNormal = []
-            classDisplayedDouble = []
+            classDisplayedNormal = [];
+            classDisplayedMixed = [];
+            classDisplayedDouble = [];
             classesSelected = JSON.parse(JSON.stringify(classOrder));
             AllElements.forEach(function(currentTag) {
-              if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))) {
-                console.log('adding ' + currentTag.features + ' due to ' + classesSelected)
+              if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))
+                && cardsSelected.includes(currentTag.card)) {
                 classDisplayedNormal = classDisplayedNormal.concat(currentTag);
               }
             });
+            AllElementsMixed.forEach(function(currentTag) {
+              if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))
+                && cardsSelected.includes(currentTag.card)) {
+                classDisplayedMixed = classDisplayedMixed.concat(currentTag);
+              }
+            });
             AllElementsDouble.forEach(function(currentTag) {
-              if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))) {
+              if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))
+                && cardsSelected.includes(currentTag.card)) {
                 classDisplayedDouble = classDisplayedDouble.concat(currentTag);
               }
             });
@@ -208,6 +316,9 @@
           if (imgElement.src === imageA) {
             imgElement.src = imageB;
             classDisplayedNormal = classDisplayedNormal.filter(function(element) {
+              return !element.features.includes(classSelected);
+              });
+            classDisplayedMixed = classDisplayedMixed.filter(function(element) {
               return !element.features.includes(classSelected);
               });
             classDisplayedDouble = classDisplayedDouble.filter(function(element) {
@@ -220,21 +331,30 @@
             imgElement.src = imageA;
             classesSelected = classesSelected.concat(classSelected);
             AllElements.forEach(function(currentTag) {
-              if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))) {
-                console.log('adding ' + currentTag.features + ' due to ' + classesSelected)
+              if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))
+                && cardsSelected.includes(currentTag.card)) {
                 classDisplayedNormal = classDisplayedNormal.concat(currentTag);
               }
             });
+            AllElementsMixed.forEach(function(currentTag) {
+              if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))
+                && cardsSelected.includes(currentTag.card)) {
+                classDisplayedMixed = classDisplayedMixed.concat(currentTag);
+              }
+            });
             AllElementsDouble.forEach(function(currentTag) {
-              if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))) {
+              if (currentTag.features.some(item => classesSelected.includes(item)) && currentTag.features.some(item => Featureselected.includes(item))
+                && cardsSelected.includes(currentTag.card)) {
                 classDisplayedDouble = classDisplayedDouble.concat(currentTag);
               }
             });
           }
         }
         classDisplayedNormal = [...new Set(classDisplayedNormal)];
+        classDisplayedMixed = [...new Set(classDisplayedMixed)];
         classDisplayedDouble = [...new Set(classDisplayedDouble)];
         classDisplayedNormal = classDisplayedNormal.sort((a, b) => a.steps - b.steps);
+        classDisplayedMixed = classDisplayedMixed.sort((a, b) => a.steps - b.steps);
         classDisplayedDouble = classDisplayedDouble.sort((a, b) => a.steps - b.steps);
         console.log(classDisplayedNormal)
         console.log(classesSelected)
@@ -253,9 +373,13 @@
   AllElementsDouble.forEach(function(currentTag) {
     classDisplayedDouble = classDisplayedDouble.concat(currentTag);
   });
+  AllElementsMixed.forEach(function(currentTag) {
+    classDisplayedMixed = classDisplayedMixed.concat(currentTag);
+  });
   classesSelected = JSON.parse(JSON.stringify(classOrder));
   classDisplayedNormal = classDisplayedNormal.sort((a, b) => a.steps - b.steps);
   classDisplayedDouble = classDisplayedDouble.sort((a, b) => a.steps - b.steps);
+  classDisplayedMixed = classDisplayedMixed.sort((a, b) => a.steps - b.steps);
 
   var chartdiv = document.getElementById("chartdiv");
   updateChartHeight();
@@ -378,14 +502,14 @@ series.bullets.push(function(root, series, dataItem) {
   );
 
   // only containers can be masked, so we add image to another container
-  var imageContainer = bulletContainer.children.push(
+  var ImageContainer = bulletContainer.children.push(
     am5.Container.new(root, {
       mask: maskCircle
     })
   );
 
   // not working
-  var image = imageContainer.children.push(
+  var image = ImageContainer.children.push(
     am5.Picture.new(root, {
       templateField: "pictureSettings",
       centerX: am5.p50,
@@ -484,10 +608,13 @@ function handleButtonClick(button) {
   var chart = root.container.children.getIndex(0);
   var series = chart.series.getIndex(0);
   var yAxes = chart.yAxes.getIndex(0);
-  if (button.id === "buttonA"){
+  if (button.id === "buttonA") {
     series.data.setAll(classDisplayedNormal);
     yAxes.data.setAll(classDisplayedNormal);
-  } else {
+  } else if (button.id === "buttonB") {
+    series.data.setAll(classDisplayedMixed);
+    yAxes.data.setAll(classDisplayedMixed);    
+  } else if (button.id === "buttonC") {
     series.data.setAll(classDisplayedDouble);
     yAxes.data.setAll(classDisplayedDouble);    
   }
@@ -505,6 +632,9 @@ document.getElementById("buttonB").addEventListener("click", function() {
   handleButtonClick(this);
 });
 
+document.getElementById("buttonC").addEventListener("click", function() {
+  handleButtonClick(this);
+});
 </script>
 </body>
 </html>
