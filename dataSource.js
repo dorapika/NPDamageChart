@@ -354,7 +354,7 @@ var AllElementsQuick = [
     name: "X Alter機械特攻",
     steps: 279251,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/25008000.png"},
-    features: ["Foreigner","惡"]
+    features: ["Foreigner","機械"]
 }, {
     name: "X Alter雙特攻",
     steps: 418876,
