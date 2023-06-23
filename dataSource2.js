@@ -491,7 +491,7 @@ var AllElementsBuster = [
     features: ["Foreigner","無"]
 }, {
     name: "迪亞馬特",
-    steps: 473901,
+    steps: 452374,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/10016000.png"},
     features: ["AlterEgo","無"]
 }, {

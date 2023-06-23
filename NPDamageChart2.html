@@ -52,6 +52,17 @@
   input[type=checkbox]:checked + label::before {
       border-left: 1px solid #4575ab;
   }
+  #watermark
+  {
+   font-family: Arial, sans-serif;
+   font-size: 20px;
+   position:fixed;
+   bottom:400px;
+   right:400px;
+   opacity:0.4;
+   z-index:99;
+   color:red;
+  }
 </style>
 
 <!-- Resources -->
@@ -97,6 +108,7 @@
 <button id="buttonB">上下六騎2倍傷害計算 + 狂丑偽職1.5倍傷害計算 + 其餘Extra1倍傷害計算</button>
 <button id="buttonC">狂職以外皆為2倍計算</button>
 <div id="chartdiv"></div>
+<div id="watermark">Dorapika@PTT</div>
 <!-- Chart code -->
 <script>
   var classImageContainer = document.getElementById("classImageContainer");
@@ -634,6 +646,9 @@ document.getElementById("buttonB").addEventListener("click", function() {
 document.getElementById("buttonC").addEventListener("click", function() {
   handleButtonClick(this);
 });
+
+
+
 </script>
 </body>
 </html>
