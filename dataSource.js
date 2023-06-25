@@ -150,6 +150,26 @@ var AllElementsArts = [
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2032000.png"},
     features: ["Archer","無"]
 }, {
+    name: "杜爾嘎",
+    steps: 149196,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2048000.png"},
+    features: ["Archer","無"]
+}, {
+    name: "杜爾嘎天特攻",
+    steps: 177844,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2048000.png"},
+    features: ["Archer","天"]
+}, {
+    name: "杜爾嘎魔性特攻",
+    steps: 223682,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2048000.png"},
+    features: ["Archer","魔性"]
+}, {
+    name: "杜爾嘎雙特攻",
+    steps: 266654,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2048000.png"},
+    features: ["Archer","天","魔性"]
+}, {
     name: "龍馬",
     steps: 197288,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3050000.png"},
