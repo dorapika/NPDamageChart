@@ -696,12 +696,12 @@ var AllElementsBuster = [
     features: ["Lancer","地"]
 }, {
     name: "源為朝",
-    steps: 178822,
+    steps: 153276,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2046000.png"},
     features: ["Archer","無"]
 }, {
     name: "源為朝秩序特攻",
-    steps: 153276,
+    steps: 229914,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2046000.png"},
     features: ["Archer","秩序"]
 },  {
