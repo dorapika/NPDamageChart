@@ -416,7 +416,7 @@ var AllElementsQuick = [
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6024000.png"},
     features: ["Assassin","神性"]
 }, {
-    name: "太公望",
+    name: "太公望 ",
     steps: 166664,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/4043000.png"},
     features: ["Rider","無"]
