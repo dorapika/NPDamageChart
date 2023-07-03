@@ -406,6 +406,16 @@ var AllElementsQuick = [
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6041000.png"},
     features: ["Assassin","無"]
 }, {
+    name: "殺師匠",
+    steps: 178780,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6024000.png"},
+    features: ["Assassin","無"]
+}, {
+    name: "殺師匠神性特攻",
+    steps: 223475,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6024000.png"},
+    features: ["Assassin","神性"]
+}, {
     name: "太公望",
     steps: 166664,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/4043000.png"},
