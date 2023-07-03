@@ -411,7 +411,7 @@ var AllElementsQuick = [
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6024000.png"},
     features: ["Assassin","無"]
 }, {
-    name: "殺師匠神性特攻",
+    name: "殺師匠神性特攻 ",
     steps: 223475,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6024000.png"},
     features: ["Assassin","神性"]
