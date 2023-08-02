@@ -739,7 +739,7 @@ var AllElementsBuster = [
     steps: 213535,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3020000.png"},
     features: ["Lancer","混沌","惡"]
-},  {
+}, {
     name: "艾蕾",
     steps: 192018,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3032000.png"},
