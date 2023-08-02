@@ -649,7 +649,7 @@ var AllElementsBuster = [
     steps: 512423,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/7023000.png"},
     features: ["Berserker","天","魔性"]
-},  {
+}  {
     name: "女帝",
     steps: 140902,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6032000.png"},
