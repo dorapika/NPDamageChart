@@ -672,12 +672,12 @@ var AllElementsBuster = [
 }, {
     name: "術摩根",
     steps: 208841,
-    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/5032000.png"},
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/5053000.png"},
     features: ["Caster","無"]
 }, {
     name: "術摩根惡特攻",
     steps: 313262,
-    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/5032000.png"},
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/5053000.png"},
     features: ["Caster","惡"]
 }, {
     name: "歐羅巴",
