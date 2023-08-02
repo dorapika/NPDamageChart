@@ -466,6 +466,11 @@ var AllElementsQuick = [
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3036000.png"},
     features: ["Lancer","無"]
 }, {
+    name: "布妹地特攻",
+    steps: 180107,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3036000.png"},
+    features: ["Lancer","地"]
+}, {
     name: "高杉晉作",
     steps: 163756,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/2047000.png"},
@@ -615,6 +620,36 @@ var AllElementsBuster = [
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/7033000.png"},
     features: ["Berserker","弱體"]
 }, {
+    name: "賴光",
+    steps: 256286,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/7023000.png"},
+    features: ["Berserker","無"]
+}, {
+    name: "賴光魔性特攻",
+    steps: 384355,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/7023000.png"},
+    features: ["Berserker","魔性"]
+}, {
+    name: "賴光地特攻",
+    steps: 422775,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/7023000.png"},
+    features: ["Berserker","地"]
+}, {
+    name: "賴光地魔性特攻",
+    steps: 563651,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/7023000.png"},
+    features: ["Berserker","地","魔性"]
+}, {
+    name: "賴光天特攻",
+    steps: 384355,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/7023000.png"},
+    features: ["Berserker","天"]
+}, {
+    name: "賴光天魔性特攻",
+    steps: 512423,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/7023000.png"},
+    features: ["Berserker","天","魔性"]
+},  {
     name: "女帝",
     steps: 140902,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/6032000.png"},
@@ -634,6 +669,16 @@ var AllElementsBuster = [
     steps: 179605,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/5032000.png"},
     features: ["Caster","無"]
+}, {
+    name: "術摩根",
+    steps: 208841,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/5032000.png"},
+    features: ["Caster","無"]
+}, {
+    name: "術摩根惡特攻",
+    steps: 313262,
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/5032000.png"},
+    features: ["Caster","惡"]
 }, {
     name: "歐羅巴",
     steps: 141085,
