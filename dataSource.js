@@ -706,7 +706,7 @@ var AllElementsBuster = [
     features: ["Rider","無"]
 }, {
     name: "妖蘭",
-    steps: 326737,
+    steps: 294063,
     pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3048000.png"},
     features: ["Lancer","無"]
 }, {
