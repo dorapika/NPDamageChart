@@ -752,12 +752,12 @@ var AllElementsBuster = [
 }, {
     name: "迦爾納",
     steps: 175190,
-    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3020000.png"},
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3004000.png"},
     features: ["Lancer","無"]
 }, {
     name: "迦爾納神性特攻",
     steps: 262685,
-    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3020000.png"},
+    pictureSettings: {src: "https://kazemai.github.io/fgo-vz/common/images/icon/faces/3004000.png"},
     features: ["Lancer","神性"]
 }, {
     name: "源為朝",
